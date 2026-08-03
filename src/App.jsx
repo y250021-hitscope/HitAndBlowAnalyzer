@@ -46,6 +46,7 @@ function App() {
   setHistory([
   ...history,
   {
+    id: Date.now(),
     number: number,
     pattern: getPattern(number),
     date: new Date().toISOString(),
@@ -54,10 +55,14 @@ function App() {
     setNumber("");
   }
 
+    function deleteHistory(id){
+    setHistory(history.filter((item) => item.id !== id));
+  }
+
 const counts = Array(10).fill(0);
 
 history.forEach((item) => {
-  item.number.Appsplit("").forEach((digit) => {
+  item.number.split("").forEach((digit) => {
     counts[Number(digit)]++;
   });
 });
@@ -81,9 +86,24 @@ history.forEach((item) => {
 
       <h2>登録履歴</h2>
 
-      {history.map((item, index) => (
-        <p key={index}>{item}</p>
-      ))}
+  {history.map((item, index) => (
+   <div
+  key={item.id}
+  style={{
+    display: "flex",
+    justifyContent: "space-between",
+    marginBottom: "8px",
+  }}
+>
+  <span>
+    {item.number}（{item.pattern}）
+  </span>
+
+  <button onClick={() => deleteHistory(item.id)}>
+    🗑️
+  </button>
+</div>
+  ))}
       <hr />
 
 <h2>数字ランキング</h2>
