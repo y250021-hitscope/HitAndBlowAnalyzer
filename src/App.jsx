@@ -1,8 +1,15 @@
+import { countCoexist } from "./analysis/coexistAnalysis";
+import { countPatternDigits } from "./analysis/patternAnalysis";
+import { countDigits } from "./analysis/digitAnalysis";
 import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
   const [number, setNumber] = useState("");
+
+  const [selectedPattern, setSelectedPattern] = useState("HHL");
+
+  const [selectedDigit, setSelectedDigit] = useState(null);
 
   const [history, setHistory] = useState(() => {
     const savedHistory = localStorage.getItem("hitScopeHistory");
@@ -59,13 +66,17 @@ function App() {
     setHistory(history.filter((item) => item.id !== id));
   }
 
-const counts = Array(10).fill(0);
+const counts = countDigits(history);
 
-history.forEach((item) => {
-  item.number.split("").forEach((digit) => {
-    counts[Number(digit)]++;
-  });
-});
+const patternCounts = countPatternDigits(
+  history,
+  selectedPattern
+);
+
+const coexistCounts =
+  selectedDigit === null
+    ? []
+    : countCoexist(history, selectedPattern, selectedDigit);
 
   return (
     <div className="container">
@@ -108,17 +119,97 @@ history.forEach((item) => {
 
 <h2>数字ランキング</h2>
 
-{counts
-  .map((count, digit) => ({
-    digit,
-    count,
-  }))
-  .sort((a, b) => b.count - a.count)
-  .map((item) => (
-    <div key={item.digit}>
-      {item.digit} → {item.count}回
+{counts.map((item) => (
+  <div key={item.digit}>
+    {item.digit} → {item.count}回
+  </div>
+))}
+
+<hr />
+
+<h2>パターン別ランキング</h2>
+
+<div className="pattern-buttons">
+  {["HHH", "HHL", "HLH", "HLL", "LHH", "LHL", "LLH", "LLL"].map(
+    (pattern) => (
+      <button
+        key={pattern}
+        onClick={() => {
+          setSelectedPattern(pattern)
+          setSelectedDigit(null);
+        }}
+      >
+        {pattern}
+      </button>
+    )
+  )}
+</div>
+
+<h3>{selectedPattern} の数字ランキング</h3>
+
+{patternCounts.length === 0 ? (
+  <p>まだデータがありません</p>
+) : (
+  patternCounts.map((item) => (
+  <button
+    key={item.digit}
+    onClick={() => setSelectedDigit(item.digit)}
+    style={{ display: "block", marginBottom: "8px" }}
+  >
+    {item.digit} → {item.count}回
+  </button>
+))
+)}
+
+{selectedDigit !== null && (
+  <>
+    <hr />
+
+    <h3>
+      {selectedPattern}で{selectedDigit}と一緒に出る数字
+    </h3>
+
+    {coexistCounts.length === 0 ? (
+      <p>該当データがありません</p>
+    ) : (
+      coexistCounts.map((item) => {
+  let levelClass = "low";
+
+  if (item.percent >= 80) {
+    levelClass = "very-high";
+  } else if (item.percent >= 60) {
+    levelClass = "high";
+  } else if (item.percent >= 30) {
+    levelClass = "medium";
+  }
+
+  return (
+    <div className="coexist-row" key={item.digit}>
+      <div className="coexist-label">
+        <strong>{item.digit}</strong>
+        <span>
+          {item.count}回（{item.percent}%）
+        </span>
+      </div>
+
+      <div className="bar-background">
+        <div
+          className={`bar-fill ${levelClass}`}
+          style={{ width: `${item.percent}%` }}
+        />
+      </div>
     </div>
-  ))}
+  );
+})
+    )}
+  </>
+)}
+
+{counts.map((item) => (
+  <div key={item.digit}>
+    {item.digit} → {item.count}回
+  </div>
+))}
     </div>
   );
 }
