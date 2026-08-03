@@ -22,6 +22,14 @@ function App() {
     setNumber("");
   }
 
+const counts = Array(10).fill(0);
+
+history.forEach((item) => {
+  item.split("").forEach((digit) => {
+    counts[Number(digit)]++;
+  });
+});
+
   return (
     <div className="container">
       <h1>🎯 HitScope</h1>
@@ -44,6 +52,21 @@ function App() {
       {history.map((item, index) => (
         <p key={index}>{item}</p>
       ))}
+      <hr />
+
+<h2>数字ランキング</h2>
+
+{counts
+  .map((count, digit) => ({
+    digit,
+    count,
+  }))
+  .sort((a, b) => b.count - a.count)
+  .map((item) => (
+    <div key={item.digit}>
+      {item.digit} → {item.count}回
+    </div>
+  ))}
     </div>
   );
 }
