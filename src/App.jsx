@@ -1,27 +1,45 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
   const [number, setNumber] = useState("");
-  const [history, setHistory] = useState([]);
+
+  const [history, setHistory] = useState(() => {
+    const savedHistory = localStorage.getItem("hitScopeHistory");
+
+    if (savedHistory) {
+      return JSON.parse(savedHistory);
+    }
+
+    return [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem(
+      "hitScopeHistory",
+      JSON.stringify(history)
+    );
+  }, [history]);
 
   const onlyNumber = (text) => {
-  return text.replace(/[^0-9]/g, "");
-}
+    return text.replace(/[^0-9]/g, "");
+  };
 
   function addNumber() {
     if (number.length !== 3) {
       alert("3桁入力してください！");
       return;
     }
+
     if (new Set(number.split("")).size !== 3) {
       alert("同じ数字は使えません！");
       return;
-}
+    }
+
     setHistory([...history, number]);
     setNumber("");
   }
-
+  
 const counts = Array(10).fill(0);
 
 history.forEach((item) => {
