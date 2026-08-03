@@ -25,6 +25,13 @@ function App() {
     return text.replace(/[^0-9]/g, "");
   };
 
+  const getPattern = (number) => {
+  return number
+    .split("")
+    .map((digit) => (Number(digit) <= 4 ? "L" : "H"))
+    .join("");
+  };
+
   function addNumber() {
     if (number.length !== 3) {
       alert("3桁入力してください！");
@@ -36,14 +43,21 @@ function App() {
       return;
     }
 
-    setHistory([...history, number]);
+  setHistory([
+  ...history,
+  {
+    number: number,
+    pattern: getPattern(number),
+    date: new Date().toISOString(),
+  },
+  ]);
     setNumber("");
   }
-  
+
 const counts = Array(10).fill(0);
 
 history.forEach((item) => {
-  item.split("").forEach((digit) => {
+  item.number.Appsplit("").forEach((digit) => {
     counts[Number(digit)]++;
   });
 });
