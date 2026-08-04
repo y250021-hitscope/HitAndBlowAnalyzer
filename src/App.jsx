@@ -84,6 +84,7 @@ function App() {
           onlyNumber={onlyNumber}
           addNumber={addNumber}
           history={history}
+          setHistory={setHistory}
           deleteHistory={deleteHistory}
         />
       ) : (

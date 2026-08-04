@@ -5,6 +5,7 @@ function DataManager({
   onlyNumber,
   addNumber,
   history,
+  setHistory,
   deleteHistory,
 }) {
   const fileInputRef = useRef(null);
