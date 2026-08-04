@@ -1,3 +1,4 @@
+import { getRecommendedDigit } from "../analysis/recommendationEngine";
 import CoexistChart from "./CoexistChart";
 import DigitChart from "./DigitChart";
 import DashboardCard from "./DashboardCard";
@@ -23,61 +24,63 @@ function AnalysisPage({ history }) {
   const coexistCounts =
     selectedDigit === null
       ? []
-      : countCoexist(
-          history,
-          selectedPattern,
-          selectedDigit
-        );
+      : countCoexist(history, selectedPattern, selectedDigit);
+
+  const recommendedDigit = getRecommendedDigit(
+    history,
+    selectedPattern,
+    selectedDigit
+  );
 
   return (
     <div>
       <h2>📊 分析</h2>
 
-    <div className="dashboard-grid">
-  <DashboardCard
-    icon="📊"
-    title="総分析数"
-    value={history.length}
-    color="#3b82f6"
-  />
+      <div className="dashboard-grid">
+        <DashboardCard
+          icon="📊"
+          title="総分析数"
+          value={history.length}
+          color="#3b82f6"
+        />
 
-  <DashboardCard
-  icon="🔥"
-  title="人気数字"
-  value={counts[0]?.digit ?? "-"}
-  color="#ef4444"
-  onClick={() => {
-    document
-      .getElementById("digit-ranking")
-      ?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-  }}
-/>
+        <DashboardCard
+          icon="🔥"
+          title="人気数字"
+          value={counts[0]?.digit ?? "-"}
+          color="#ef4444"
+          onClick={() => {
+            document
+              .getElementById("digit-ranking")
+              ?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+          }}
+        />
 
-  <DashboardCard
-  icon="🎲"
-  title="人気パターン"
-  value={selectedPattern}
-  color="#10b981"
-  onClick={() => {
-    document
-      .getElementById("pattern-analysis")
-      ?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-  }}
-/>
+        <DashboardCard
+          icon="🎲"
+          title="人気パターン"
+          value={selectedPattern}
+          color="#10b981"
+          onClick={() => {
+            document
+              .getElementById("pattern-analysis")
+              ?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+          }}
+        />
 
-  <DashboardCard
-    icon="🤝"
-    title="共起分析"
-    value={selectedDigit ?? "-"}
-    color="#f59e0b"
-  />
-</div>
+        <DashboardCard
+          icon="🤝"
+          title="共起分析"
+          value={selectedDigit ?? "-"}
+          color="#f59e0b"
+        />
+      </div>
 
       <InsightCard history={history} />
 
@@ -143,6 +146,27 @@ function AnalysisPage({ history }) {
       {selectedDigit !== null && (
         <>
           <hr />
+
+          {recommendedDigit && (
+            <div className="recommendation-card">
+              <p className="recommendation-label">
+                🤖 HitScope おすすめ
+              </p>
+
+              <h3>
+                {selectedPattern}で{selectedDigit}を使うなら
+              </h3>
+
+              <div className="recommendation-value">
+                {recommendedDigit.digit}
+              </div>
+
+              <p>
+                共起率 {recommendedDigit.percent}%
+                （{recommendedDigit.count}回）
+              </p>
+            </div>
+          )}
 
           <h3>
             {selectedPattern}で{selectedDigit}と一緒に出る数字
