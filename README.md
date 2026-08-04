@@ -10,7 +10,7 @@ HitScopeは、Hit&Blow（Bulls and Cows）の対戦データを分析するWeb�
 
 # 📸 Preview
 
-![HitScope Preview](screenshots/home.png)
+![HitScope Preview](public/screenshots/home.png)
 
 ---
 
