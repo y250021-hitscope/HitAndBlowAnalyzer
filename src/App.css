@@ -310,3 +310,10 @@ hr {
   color:white;
   margin-top:10px;
 }
+.chart-card {
+  margin: 18px 0 28px;
+  padding: 18px;
+  background: rgba(7, 17, 31, 0.62);
+  border: 1px solid rgba(87, 119, 168, 0.24);
+  border-radius: 18px;
+}

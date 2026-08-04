@@ -1,3 +1,5 @@
+import CoexistChart from "./CoexistChart";
+import DigitChart from "./DigitChart";
 import DashboardCard from "./DashboardCard";
 import InsightCard from "./InsightCard";
 import { getInsights } from "../analysis/insightEngine";
@@ -80,6 +82,7 @@ function AnalysisPage({ history }) {
       <InsightCard history={history} />
 
       <h3 id="digit-ranking">📈 数字ランキング</h3>
+      <DigitChart counts={counts} />
 
       {counts.length === 0 ? (
         <p>まだデータがありません</p>
@@ -144,6 +147,7 @@ function AnalysisPage({ history }) {
           <h3>
             {selectedPattern}で{selectedDigit}と一緒に出る数字
           </h3>
+          <CoexistChart counts={coexistCounts} />
 
           {coexistCounts.length === 0 ? (
             <p>該当データがありません</p>
