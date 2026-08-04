@@ -32,9 +32,15 @@ function AIRecommendationCard({ ai }) {
 
       <h3>💬 AIコメント</h3>
 
-      {ai.explanation.map((text, index) => (
-        <p key={index}>✓ {text}</p>
-      ))}
+      <div className="ai-message">
+  {ai.explanation.map((text, index) => (
+    <p key={index}>{text}</p>
+  ))}
+</div>
+
+<p className="ai-note">
+  📌 データが増えるほど、HitScope AIの分析精度は向上します。
+</p>
 
     </div>
   );

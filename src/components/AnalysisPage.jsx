@@ -36,10 +36,10 @@ function AnalysisPage({ history }) {
   );
 
   const ai = getHitScopeAI(
-  history,
-  selectedPattern,
-  selectedDigit
-);
+    history,
+    selectedPattern,
+    selectedDigit
+  );
 
   const recommendedNumbers = getRecommendedNumbers(
     history,
@@ -137,36 +137,37 @@ function AnalysisPage({ history }) {
           </button>
         ))}
       </div>
-        <div className="number-recommendation-card">
-  <p className="recommendation-label">
-    🤖 HitScope AI Builder
-  </p>
 
-  <h3>{selectedPattern}のおすすめ候補</h3>
+      <div className="number-recommendation-card">
+        <p className="recommendation-label">
+          🤖 HitScope AI Builder
+        </p>
 
-  {recommendedNumbers.length === 0 ? (
-    <p>このパターンのデータがまだありません。</p>
-  ) : (
-    <div className="recommended-number-list">
-      {recommendedNumbers.map((item, index) => (
-        <div
-          className="recommended-number-item"
-          key={item.number}
-        >
-          <span className="recommendation-rank">
-            {index + 1}位
-          </span>
+        <h3>{selectedPattern}のおすすめ候補</h3>
 
-          <strong>{item.number}</strong>
+        {recommendedNumbers.length === 0 ? (
+          <p>このパターンのデータがまだありません。</p>
+        ) : (
+          <div className="recommended-number-list">
+            {recommendedNumbers.map((item, index) => (
+              <div
+                className="recommended-number-item"
+                key={item.number}
+              >
+                <span className="recommendation-rank">
+                  {index + 1}位
+                </span>
 
-          <span>
-            登録 {item.exactCount}回
-          </span>
-        </div>
-      ))}
-    </div>
-  )}
-</div>
+                <strong>{item.number}</strong>
+
+                <span>
+                  登録 {item.exactCount}回
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
       <h3>{selectedPattern} の数字ランキング</h3>
 
       {patternCounts.length === 0 ? (
@@ -189,29 +190,8 @@ function AnalysisPage({ history }) {
       {selectedDigit !== null && (
         <>
           <hr />
-{/*
-          {recommendedDigit && (
-            <div className="recommendation-card">
-              <p className="recommendation-label">
-                🤖 HitScope おすすめ
-              </p>
 
-              <h3>
-                {selectedPattern}で{selectedDigit}を使うなら
-              </h3>
-
-              <div className="recommendation-value">
-                {recommendedDigit.digit}
-              </div>
-
-              <p>
-                共起率 {recommendedDigit.percent}%
-                （{recommendedDigit.count}回）
-              </p>
-            </div>
-          )}
-*/}
-    <AIRecommendationCard ai={ai} />
+          <AIRecommendationCard ai={ai} />
 
           <h3>
             {selectedPattern}で{selectedDigit}と一緒に出る数字

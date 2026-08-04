@@ -462,3 +462,28 @@ hr {
 .chart-card{
     height:420px;
 }
+.ai-message {
+  margin-top: 16px;
+  padding: 18px;
+  text-align: left;
+  background: rgba(7, 17, 31, 0.55);
+  border: 1px solid rgba(130, 170, 235, 0.2);
+  border-radius: 14px;
+}
+
+.ai-message p {
+  margin: 0 0 12px;
+  color: #e4edff;
+  line-height: 1.8;
+}
+
+.ai-message p:last-child {
+  margin-bottom: 0;
+}
+
+.ai-note {
+  margin-top: 16px;
+  color: #a9bad4;
+  font-size: 13px;
+  line-height: 1.6;
+}
