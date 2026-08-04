@@ -8,6 +8,7 @@ import { useState } from "react";
 import { countDigits } from "../analysis/digitAnalysis";
 import { countPatternDigits } from "../analysis/patternAnalysis";
 import { countCoexist } from "../analysis/coexistAnalysis";
+import { getRecommendedNumbers } from "../analysis/recommendationEngine";
 
 function AnalysisPage({ history }) {
   const [selectedPattern, setSelectedPattern] = useState("HHL");
@@ -30,6 +31,11 @@ function AnalysisPage({ history }) {
     history,
     selectedPattern,
     selectedDigit
+  );
+
+  const recommendedNumbers = getRecommendedNumbers(
+    history,
+    selectedPattern
   );
 
   return (
@@ -60,7 +66,7 @@ function AnalysisPage({ history }) {
         />
 
         <DashboardCard
-          icon="🎲"
+          icon="🧩"
           title="人気パターン"
           value={selectedPattern}
           color="#10b981"
@@ -99,7 +105,7 @@ function AnalysisPage({ history }) {
 
       <hr />
 
-      <h3 id="pattern-analysis">🎲 パターン別分析</h3>
+      <h3 id="pattern-analysis">🧩 パターン別分析</h3>
 
       <div className="pattern-buttons">
         {[
@@ -123,7 +129,36 @@ function AnalysisPage({ history }) {
           </button>
         ))}
       </div>
+        <div className="number-recommendation-card">
+  <p className="recommendation-label">
+    🤖 HitScope AI Builder
+  </p>
 
+  <h3>{selectedPattern}のおすすめ候補</h3>
+
+  {recommendedNumbers.length === 0 ? (
+    <p>このパターンのデータがまだありません。</p>
+  ) : (
+    <div className="recommended-number-list">
+      {recommendedNumbers.map((item, index) => (
+        <div
+          className="recommended-number-item"
+          key={item.number}
+        >
+          <span className="recommendation-rank">
+            {index + 1}位
+          </span>
+
+          <strong>{item.number}</strong>
+
+          <span>
+            登録 {item.exactCount}回
+          </span>
+        </div>
+      ))}
+    </div>
+  )}
+</div>
       <h3>{selectedPattern} の数字ランキング</h3>
 
       {patternCounts.length === 0 ? (
