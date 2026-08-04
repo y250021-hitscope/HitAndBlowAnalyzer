@@ -1,3 +1,5 @@
+import InsightCard from "./InsightCard";
+import { getInsights } from "../analysis/insightEngine";
 import { useState } from "react";
 import { countDigits } from "../analysis/digitAnalysis";
 import { countPatternDigits } from "../analysis/patternAnalysis";
@@ -8,6 +10,7 @@ function AnalysisPage({ history }) {
   const [selectedDigit, setSelectedDigit] = useState(null);
 
   const counts = countDigits(history);
+  const insights = getInsights(history);
 
   const patternCounts = countPatternDigits(
     history,
@@ -26,6 +29,8 @@ function AnalysisPage({ history }) {
   return (
     <div>
       <h2>📊 分析</h2>
+
+      <InsightCard history={history} />
 
       <h3>数字ランキング</h3>
 
