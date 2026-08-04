@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { supabase } from "../lib/supabase";
 function DataManager({
   number,
   setNumber,

@@ -3,6 +3,7 @@ import AnalysisPage from "./components/AnalysisPage";
 import DataManager from "./components/DataManager";
 import { useEffect, useState } from "react";
 import "./App.css";
+import { supabase } from "./lib/supabase";
 
 function App() {
   const [number, setNumber] = useState("");
@@ -31,7 +32,7 @@ function App() {
       .join("");
   };
 
-  function addNumber() {
+  async function addNumber() {
     if (number.length !== 3) {
       alert("3桁入力してください！");
       return;
@@ -42,17 +43,50 @@ function App() {
       return;
     }
 
-    setHistory([
-      ...history,
-      {
-        id: Date.now(),
-        number: number,
-        pattern: getPattern(number),
-        date: new Date().toISOString(),
-      },
-    ]);
-    setNumber("");
+    const { error } = await supabase
+  .from("games")
+  .insert([
+    {
+      number: number,
+      source: "web",
+    },
+  ]);
+
+if (error) {
+  console.error("Supabase保存エラー:", error);
+  alert(`保存に失敗しました！${error.message}`);
+  return;
+}
+
+await loadHistory();
+
+setNumber("");
   }
+
+useEffect(() => {
+  loadHistory();
+}, []);
+
+async function loadHistory() {
+  const { data, error } = await supabase
+    .from("games")
+    .select("*")
+    .order("created_at", { ascending: true });
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  setHistory(
+    data.map((item) => ({
+      id: item.id,
+      number: item.number,
+      pattern: getPattern(item.number),
+      date: item.created_at,
+    }))
+  );
+}
 
   function deleteHistory(id) {
     setHistory(history.filter((item) => item.id !== id));
