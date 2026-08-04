@@ -243,3 +243,67 @@ hr {
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
+.header{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.header h1{
+  margin-bottom:8px;
+  font-size:42px;
+}
+
+.catchcopy {
+  font-size: 26px;
+  font-weight: 700;
+  color: white;
+  margin: 8px 0;
+}
+
+.subtitle {
+  color: #9fb7dc;
+  font-size: 16px;
+  margin-top: 6px;
+}
+
+.description{
+  color:#b8c6dc;
+  font-size:15px;
+}
+.dashboard-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.dashboard-card{
+  background:#16253d;
+  border:1px solid #2d456d;
+  border-radius:18px;
+  padding:20px;
+  text-align:center;
+  transition:.2s;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+
+.dashboard-icon{
+  font-size:30px;
+}
+
+.dashboard-title{
+  color:#9fb7dc;
+  margin-top:8px;
+}
+
+.dashboard-value{
+  font-size:34px;
+  font-weight:bold;
+  color:white;
+  margin-top:10px;
+}

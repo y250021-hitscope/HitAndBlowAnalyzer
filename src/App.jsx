@@ -1,4 +1,5 @@
-﻿import AnalysisPage from "./components/AnalysisPage";
+﻿import Header from "./components/Header";
+import AnalysisPage from "./components/AnalysisPage";
 import DataManager from "./components/DataManager";
 import { useEffect, useState } from "react";
 import "./App.css";
@@ -59,6 +60,7 @@ function App() {
 
   return (
     <div className="container">
+      <Header />
       <div className="page-switcher">
         <button
   className={activePage === "data" ? "active" : ""}

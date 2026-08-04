@@ -1,3 +1,4 @@
+import DashboardCard from "./DashboardCard";
 import InsightCard from "./InsightCard";
 import { getInsights } from "../analysis/insightEngine";
 import { useState } from "react";
@@ -29,6 +30,36 @@ function AnalysisPage({ history }) {
   return (
     <div>
       <h2>📊 分析</h2>
+
+    <div className="dashboard-grid">
+  <DashboardCard
+    icon="📊"
+    title="総分析数"
+    value={history.length}
+    color="#3b82f6"
+  />
+
+  <DashboardCard
+    icon="🔥"
+    title="人気数字"
+    value={counts[0]?.digit ?? "-"}
+    color="#ef4444"
+  />
+
+  <DashboardCard
+    icon="🎲"
+    title="人気パターン"
+    value={selectedPattern}
+    color="#10b981"
+  />
+
+  <DashboardCard
+    icon="🤝"
+    title="共起分析"
+    value={selectedDigit ?? "-"}
+    color="#f59e0b"
+  />
+</div>
 
       <InsightCard history={history} />
 
