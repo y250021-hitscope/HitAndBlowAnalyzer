@@ -394,3 +394,71 @@ hr {
 .recommendation-rank {
   font-weight: 700;
 }
+.ai-card{
+  margin:30px 0;
+
+  padding:28px;
+
+  border-radius:22px;
+
+  background:linear-gradient(
+    135deg,
+    #1b2b48,
+    #233b68,
+    #2c4e89
+  );
+
+  border:2px solid #5ca8ff;
+
+  box-shadow:0 0 35px rgba(92,168,255,.25);
+
+  text-align:center;
+}
+
+.ai-header{
+  font-size:28px;
+  font-weight:bold;
+  color:white;
+
+  margin-bottom:18px;
+}
+
+.ai-label{
+  color:#b8c6dc;
+}
+
+.ai-number{
+  font-size:72px;
+
+  font-weight:bold;
+
+  color:white;
+
+  margin:15px 0;
+}
+
+.ai-score{
+
+  font-size:26px;
+
+  color:#ffd54f;
+
+  margin-bottom:10px;
+}
+
+.ai-stars{
+
+  font-size:34px;
+
+  margin-bottom:15px;
+}
+
+.ai-confidence{
+
+  color:#dbe8ff;
+
+  margin-bottom:20px;
+}
+.chart-card{
+    height:420px;
+}

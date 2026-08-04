@@ -1,4 +1,5 @@
-import { getRecommendedDigit } from "../analysis/recommendationEngine";
+import { getRecommendedDigit } from "../ai/recommendationEngine";
+import { getHitScopeAI } from "../ai/hitScopeAI";
 import CoexistChart from "./CoexistChart";
 import DigitChart from "./DigitChart";
 import DashboardCard from "./DashboardCard";
@@ -8,7 +9,8 @@ import { useState } from "react";
 import { countDigits } from "../analysis/digitAnalysis";
 import { countPatternDigits } from "../analysis/patternAnalysis";
 import { countCoexist } from "../analysis/coexistAnalysis";
-import { getRecommendedNumbers } from "../analysis/recommendationEngine";
+import { getRecommendedNumbers } from "../ai/recommendationEngine";
+import AIRecommendationCard from "./AIRecommendationCard";
 
 function AnalysisPage({ history }) {
   const [selectedPattern, setSelectedPattern] = useState("HHL");
@@ -32,6 +34,12 @@ function AnalysisPage({ history }) {
     selectedPattern,
     selectedDigit
   );
+
+  const ai = getHitScopeAI(
+  history,
+  selectedPattern,
+  selectedDigit
+);
 
   const recommendedNumbers = getRecommendedNumbers(
     history,
@@ -181,7 +189,7 @@ function AnalysisPage({ history }) {
       {selectedDigit !== null && (
         <>
           <hr />
-
+{/*
           {recommendedDigit && (
             <div className="recommendation-card">
               <p className="recommendation-label">
@@ -202,6 +210,8 @@ function AnalysisPage({ history }) {
               </p>
             </div>
           )}
+*/}
+    <AIRecommendationCard ai={ai} />
 
           <h3>
             {selectedPattern}で{selectedDigit}と一緒に出る数字

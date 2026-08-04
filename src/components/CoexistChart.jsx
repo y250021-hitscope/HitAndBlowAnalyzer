@@ -23,19 +23,39 @@ function CoexistChart({ counts }) {
 
   const data = {
     labels: counts.map((item) => String(item.digit)),
-    datasets: [
-      {
-        label: "共起率",
-        data: counts.map((item) => item.percent),
-        borderWidth: 1,
-        borderRadius: 8,
-      },
+datasets: [
+  {
+    label: "共起率",
+    data: counts.map((item) => item.percent),
+
+    backgroundColor: [
+      "#ff4d6d",
+      "#00b4ff",
+      "#4cd137",
+      "#fbc531",
+      "#9c6bff",
+      "#ff7f50",
+      "#00d2d3",
+      "#ff9ff3",
+      "#2ed573",
+      "#ffa502",
     ],
+
+    borderWidth: 0,
+
+    borderRadius: 10,
+
+    barPercentage: 0.75,
+
+    categoryPercentage: 0.8,
+  },
+],
   };
 
   const options = {
     indexAxis: "y",
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         display: false,

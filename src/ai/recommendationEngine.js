@@ -1,4 +1,4 @@
-import { countCoexist } from "./coexistAnalysis";
+import { countCoexist } from "../analysis/coexistAnalysis";
 
 export function getRecommendedDigit(
   history,
