@@ -60,8 +60,19 @@ function App() {
   return (
     <div className="container">
       <div className="page-switcher">
-        <button onClick={() => setActivePage("data")}>📥 データ管理</button>
-        <button onClick={() => setActivePage("analysis")}>📊 分析</button>
+        <button
+  className={activePage === "data" ? "active" : ""}
+  onClick={() => setActivePage("data")}
+>
+  📥 データ管理
+</button>
+
+<button
+  className={activePage === "analysis" ? "active" : ""}
+  onClick={() => setActivePage("analysis")}
+>
+  📊 分析
+</button>
       </div>
 
       {activePage === "data" ? (

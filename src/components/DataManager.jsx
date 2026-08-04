@@ -17,11 +17,11 @@ function DataManager({
         placeholder="583"
       />
 
-      <button onClick={addNumber}>登録</button>
+      <button onClick={addNumber}>➕ 登録</button>
 
       <hr />
 
-      <h2>登録履歴</h2>
+      <h2>📋 登録履歴</h2>
 
       {history.map((item) => (
         <div
@@ -37,7 +37,7 @@ function DataManager({
           </span>
 
           <button onClick={() => deleteHistory(item.id)}>
-            🗑️
+            🗑️ 削除
           </button>
         </div>
       ))}

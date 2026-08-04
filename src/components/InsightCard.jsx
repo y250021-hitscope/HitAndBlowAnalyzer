@@ -5,16 +5,10 @@ function InsightCard({ history }) {
 
   return (
     <>
-      <h2>🧠 HitScope Insight</h2>
+      <p className="insight-label">🧠 Insight Engine</p>
+      <h2>💡 今日の発見</h2>
 
-      <div
-        style={{
-          background: "#eef6ff",
-          padding: "16px",
-          borderRadius: "12px",
-          marginBottom: "20px",
-        }}
-      >
+      <div className="insight-card">
         {insights.map((text, index) => (
           <p key={index}>{text}</p>
         ))}

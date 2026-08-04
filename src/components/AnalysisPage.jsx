@@ -32,7 +32,7 @@ function AnalysisPage({ history }) {
 
       <InsightCard history={history} />
 
-      <h3>数字ランキング</h3>
+      <h3>📈 数字ランキング</h3>
 
       {counts.length === 0 ? (
         <p>まだデータがありません</p>
@@ -46,7 +46,7 @@ function AnalysisPage({ history }) {
 
       <hr />
 
-      <h3>パターン別ランキング</h3>
+      <h3>🎲 パターン別ランキング</h3>
 
       <div className="pattern-buttons">
         {[
