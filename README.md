@@ -1,16 +1,54 @@
-# React + Vite
+# 🎯 HitScope
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> **数字をもっと面白く。**
 
-Currently, two official plugins are available:
+HitScopeは、Hit&Blow（Bulls and Cows）の対戦データを分析するWebアプリです。
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+数字の人気ランキングやパターン分析、共起分析、AIによるおすすめ機能を搭載しています。
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+# 📸 Preview
 
-## Expanding the ESLint configuration
+![HitScope Preview](screenshots/home.png)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+# ✨ 主な機能
+
+- 📥 データ登録・削除
+- 💾 CSVエクスポート / インポート
+- 📊 数字ランキング
+- 🧩 パターン（HHH・HHLなど）分析
+- 🤝 共起分析
+- 🤖 HitScope AI
+- 💡 Insight Engine
+- 🌙 ダークテーマUI
+
+---
+
+# 🛠 使用技術
+
+- React
+- Vite
+- Chart.js
+- JavaScript
+- CSS
+- LocalStorage
+- Git / GitHub
+- Vercel
+
+---
+
+# 🌍 公開サイト
+
+（ここにVercelのURLを貼る）
+
+---
+
+# 🚀 今後の予定
+
+- 世界中のデータ共有
+- Supabase導入
+- AIの高度化
+- プレイヤー分析
