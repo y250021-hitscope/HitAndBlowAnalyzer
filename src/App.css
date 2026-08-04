@@ -108,3 +108,15 @@ hr{
 .bar-fill.low {
   background: #ef4444;
 }
+.page-switcher {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.page-switcher button {
+  margin-top: 0;
+  padding: 12px;
+  font-size: 15px;
+}
