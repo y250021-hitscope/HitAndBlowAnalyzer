@@ -249,8 +249,10 @@ hr {
 }
 
 .header h1{
-  margin-bottom:8px;
-  font-size:42px;
+  letter-spacing: 1px;
+  font-weight: 800;
+  font-size:48px;
+  color:white;
 }
 
 .catchcopy {
@@ -284,6 +286,7 @@ hr {
   padding:20px;
   text-align:center;
   transition:.2s;
+  cursor: pointer;
 }
 
 .dashboard-card:hover {

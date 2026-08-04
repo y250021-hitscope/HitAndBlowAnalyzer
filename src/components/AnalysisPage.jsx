@@ -40,18 +40,34 @@ function AnalysisPage({ history }) {
   />
 
   <DashboardCard
-    icon="🔥"
-    title="人気数字"
-    value={counts[0]?.digit ?? "-"}
-    color="#ef4444"
-  />
+  icon="🔥"
+  title="人気数字"
+  value={counts[0]?.digit ?? "-"}
+  color="#ef4444"
+  onClick={() => {
+    document
+      .getElementById("digit-ranking")
+      ?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+  }}
+/>
 
   <DashboardCard
-    icon="🎲"
-    title="人気パターン"
-    value={selectedPattern}
-    color="#10b981"
-  />
+  icon="🎲"
+  title="人気パターン"
+  value={selectedPattern}
+  color="#10b981"
+  onClick={() => {
+    document
+      .getElementById("pattern-analysis")
+      ?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+  }}
+/>
 
   <DashboardCard
     icon="🤝"
@@ -63,7 +79,7 @@ function AnalysisPage({ history }) {
 
       <InsightCard history={history} />
 
-      <h3>📈 数字ランキング</h3>
+      <h3 id="digit-ranking">📈 数字ランキング</h3>
 
       {counts.length === 0 ? (
         <p>まだデータがありません</p>
@@ -77,7 +93,7 @@ function AnalysisPage({ history }) {
 
       <hr />
 
-      <h3>🎲 パターン別ランキング</h3>
+      <h3 id="pattern-analysis">🎲 パターン別分析</h3>
 
       <div className="pattern-buttons">
         {[
