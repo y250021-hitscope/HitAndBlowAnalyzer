@@ -42,7 +42,7 @@ HitScopeは、Hit&Blow（Bulls and Cows）の対戦データを分析するWeb�
 
 # 🌍 公開サイト
 
-（ここにVercelのURLを貼る）
+https://hit-and-blow-analyzer.vercel.app
 
 ---
 
