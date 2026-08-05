@@ -32,37 +32,54 @@ function App() {
       .join("");
   };
 
-  async function addNumber() {
-    if (number.length !== 3) {
-      alert("3桁入力してください！");
-      return;
-    }
-
-    if (new Set(number.split("")).size !== 3) {
-      alert("同じ数字は使えません！");
-      return;
-    }
-
-    const { error } = await supabase
-  .from("games")
-  .insert([
-    {
-      number: number,
-      source: "web",
-    },
-  ]);
-
-if (error) {
-  console.error("Supabase保存エラー:", error);
-  alert(`保存に失敗しました！${error.message}`);
-  return;
-}
-
-await loadHistory();
-
-setNumber("");
+async function addNumber() {
+  if (number.length !== 3) {
+    alert("3桁入力してください！");
+    return;
   }
 
+  if (new Set(number.split("")).size !== 3) {
+    alert("同じ数字は使えません！");
+    return;
+  }
+
+  // 匿名ユーザー取得
+  let {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  // 初回だけ匿名ログイン
+  if (!user) {
+    const { error: authError } = await supabase.auth.signInAnonymously();
+
+    if (authError) {
+      alert("ログインに失敗しました");
+      return;
+    }
+
+    const result = await supabase.auth.getUser();
+    user = result.data.user;
+  }
+
+  const { error } = await supabase
+    .from("games")
+    .insert([
+      {
+        number: number,
+        source: "web",
+        user_id: user.id, // ←追加！！
+      },
+    ]);
+
+  if (error) {
+    console.error("Supabase保存エラー:", error);
+    alert(`保存に失敗しました！ ${error.message}`);
+    return;
+  }
+
+  await loadHistory();
+  setNumber("");
+}
 useEffect(() => {
   loadHistory();
 }, []);
@@ -87,11 +104,48 @@ async function loadHistory() {
     }))
   );
 }
+async function deleteHistory(id) {
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
 
-  function deleteHistory(id) {
-    setHistory(history.filter((item) => item.id !== id));
+  if (userError || !user) {
+    alert("ユーザー情報を取得できませんでした！");
+    return;
   }
 
+  const confirmed = window.confirm(
+    "このデータを完全に削除しますか？"
+  );
+
+  if (!confirmed) {
+    return;
+  }
+
+  const { data: deletedRows, error } = await supabase
+    .from("games")
+    .delete()
+    .eq("id", id)
+    .eq("user_id", user.id)
+    .select();
+
+  if (error) {
+    console.error("削除エラー:", error);
+    alert(`削除に失敗しました！${error.message}`);
+    return;
+  }
+
+  if (deletedRows.length === 0) {
+    alert(
+      "このデータは自分が登録したものではないため削除できません。"
+    );
+    await loadHistory();
+    return;
+  }
+
+  await loadHistory();
+}
   return (
     <div className="container">
       <Header />
