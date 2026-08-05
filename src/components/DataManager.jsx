@@ -8,6 +8,7 @@ function DataManager({
   history,
   setHistory,
   deleteHistory,
+  currentUserId,
 }) {
   const fileInputRef = useRef(null);
   function exportCsv() {
@@ -132,9 +133,11 @@ if (
             {item.number}（{item.pattern}）
           </span>
 
-          <button onClick={() => deleteHistory(item.id)}>
-            🗑️ 削除
-          </button>
+          {item.userId === currentUserId && (
+            <button onClick={() => deleteHistory(item.id)}>
+              🗑️ 削除
+            </button>
+          )}
         </div>
       ))}
     </div>
