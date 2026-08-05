@@ -32,6 +32,55 @@ function App() {
       .join("");
   };
 
+async function getOrCreateUser() {
+  const {
+    data: { session },
+    error: sessionError,
+  } = await supabase.auth.getSession();
+
+  if (sessionError) {
+    console.error("セッション取得エラー:", sessionError);
+  }
+
+  if (session?.user) {
+    return session.user;
+  }
+
+  const {
+    data,
+    error: authError,
+  } = await supabase.auth.signInAnonymously();
+
+  if (authError) {
+    console.error("匿名ログインエラー:", authError);
+    return null;
+  }
+
+  return data.user;
+}
+
+async function getOrCreateUser() {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (session?.user) {
+    return session.user;
+  }
+
+  const {
+    data,
+    error,
+  } = await supabase.auth.signInAnonymously();
+
+  if (error) {
+    console.error(error);
+    return null;
+  }
+
+  return data.user;
+}
+
 async function addNumber() {
   if (number.length !== 3) {
     alert("3桁入力してください！");
@@ -44,22 +93,12 @@ async function addNumber() {
   }
 
   // 匿名ユーザー取得
-  let {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getOrCreateUser();
 
-  // 初回だけ匿名ログイン
-  if (!user) {
-    const { error: authError } = await supabase.auth.signInAnonymously();
-
-    if (authError) {
-      alert("ログインに失敗しました");
-      return;
-    }
-
-    const result = await supabase.auth.getUser();
-    user = result.data.user;
-  }
+if (!user) {
+  alert("ユーザー情報を取得できませんでした！");
+  return;
+}
 
   const { error } = await supabase
     .from("games")
@@ -104,13 +143,11 @@ async function loadHistory() {
     }))
   );
 }
-async function deleteHistory(id) {
-  const {
-    data: { user },
-    error: userError,
-  } = await supabase.auth.getUser();
 
-  if (userError || !user) {
+async function deleteHistory(id) {
+  const user = await getOrCreateUser();
+
+  if (!user) {
     alert("ユーザー情報を取得できませんでした！");
     return;
   }
@@ -136,17 +173,16 @@ async function deleteHistory(id) {
     return;
   }
 
-  if (deletedRows.length === 0) {
-    alert(
-      "このデータは自分が登録したものではないため削除できません。"
-    );
+  if (!deletedRows || deletedRows.length === 0) {
+    alert("このデータは自分が登録したものではないため削除できません！");
     await loadHistory();
     return;
   }
 
   await loadHistory();
 }
-  return (
+
+return (
     <div className="container">
       <Header />
       <div className="page-switcher">
