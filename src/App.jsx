@@ -8,7 +8,7 @@ import { supabase } from "./lib/supabase";
 function App() {
   const [number, setNumber] = useState("");
   const [activePage, setActivePage] = useState("analysis");
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUserId, setCurrentUserId] = useState(null);
 
   const [history, setHistory] = useState(() => {
     const savedHistory = localStorage.getItem("hitScopeHistory");
