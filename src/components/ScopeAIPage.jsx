@@ -115,6 +115,36 @@ function ScopeAIPage() {
               </strong>
             </p>
           </div>
+
+<div className="scope-ai-score">
+  <h3>🧠 ScopeScore</h3>
+
+  <div className="scope-ai-total-score">
+    {recommendation.scopeScore.totalScore}
+  </div>
+
+  <p>
+    情報量：
+    <strong>
+      {recommendation.scopeScore.informationScore}
+    </strong>
+  </p>
+
+  <p>
+    最悪ケース耐性：
+    <strong>
+      {recommendation.scopeScore.worstCaseScore}
+    </strong>
+  </p>
+
+  <p>
+    即勝率：
+    <strong>
+      {recommendation.scopeScore.immediateWinScore}
+    </strong>
+  </p>
+</div>
+
         </div>
       )}
 

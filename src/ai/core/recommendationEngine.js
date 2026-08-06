@@ -1,3 +1,4 @@
+import { calculateScopeScore } from "../battle/scoreEngine";
 import {
   calculateExpectedRemaining,
   calculateWorstCaseRemaining,
@@ -33,9 +34,16 @@ export function findBestGuess(candidates) {
     }
   });
 
-  return {
-    guess: bestGuess,
-    expectedRemaining: bestScore,
-    worstCaseRemaining: bestWorstCase,
-  };
+const scopeScore = calculateScopeScore({
+  expectedRemaining: bestScore,
+  worstCaseRemaining: bestWorstCase,
+  candidateCount: candidates.length,
+});
+
+return {
+  guess: bestGuess,
+  expectedRemaining: bestScore,
+  worstCaseRemaining: bestWorstCase,
+  scopeScore,
+};
 }
