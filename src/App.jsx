@@ -1,4 +1,5 @@
-﻿import Header from "./components/Header";
+﻿import ScopeAIPage from "./components/ScopeAIPage";
+import Header from "./components/Header";
 import AnalysisPage from "./components/AnalysisPage";
 import DataManager from "./components/DataManager";
 import { useEffect, useState } from "react";
@@ -192,6 +193,13 @@ useEffect(() => {
           📊 分析
         </button>
       </div>
+
+    <button
+  className={activePage === "scopeAI" ? "active" : ""}
+  onClick={() => setActivePage("scopeAI")}
+>
+  🤖 ScopeAI
+</button>
 
       {activePage === "data" ? (
         <DataManager
