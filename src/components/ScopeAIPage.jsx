@@ -1,3 +1,4 @@
+import { chooseStrategy } from "../ai/battle/strategyEngine";
 import { useMemo, useState } from "react";
 import {
   filterCandidates,
@@ -10,6 +11,16 @@ function ScopeAIPage() {
   const [hit, setHit] = useState(0);
   const [blow, setBlow] = useState(0);
   const [battleHistory, setBattleHistory] = useState([]);
+  const testState = {
+  turn: 1,
+  myItems: ["highLow", "change"],
+  myUsedItems: [],
+};
+
+console.log(
+  "🔥 ScopeAI Strategy Test:",
+  chooseStrategy(testState)
+);
 
   // 履歴と矛盾しない答え候補
   const candidates = useMemo(() => {
