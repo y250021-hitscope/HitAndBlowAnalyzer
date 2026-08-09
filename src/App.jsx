@@ -202,19 +202,21 @@ useEffect(() => {
 </button>
 
       {activePage === "data" ? (
-        <DataManager
-          number={number}
-          setNumber={setNumber}
-          onlyNumber={onlyNumber}
-          addNumber={addNumber}
-          history={history}
-          setHistory={setHistory}
-          deleteHistory={deleteHistory}
-          currentUserId={currentUserId}
-        />
-      ) : (
-        <AnalysisPage history={history} />
-      )}
+  <DataManager
+    number={number}
+    setNumber={setNumber}
+    onlyNumber={onlyNumber}
+    addNumber={addNumber}
+    history={history}
+    setHistory={setHistory}
+    deleteHistory={deleteHistory}
+    currentUserId={currentUserId}
+  />
+) : activePage === "scopeAI" ? (
+  <ScopeAIPage />
+) : (
+  <AnalysisPage history={history} />
+)}
     </div>
   );
 }
