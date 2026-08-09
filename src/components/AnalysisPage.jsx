@@ -222,7 +222,7 @@ function AnalysisPage({ history }) {
                     </span>
                   </div>
 
-                  <div className="bar-background">
+                  <div className="bar-background">x
                     <div
                       className={`bar-fill ${levelClass}`}
                       style={{
