@@ -1,4 +1,4 @@
-import { summarizeKnowledgeVotes } from "../knowledge/knowledgeEngine";
+import { summarizeKnowledgeVotes } from "../knowledge/knowledgeEngine.js";
 
 export function chooseStrategy(state) {
   const knowledgeVotes = summarizeKnowledgeVotes(state);

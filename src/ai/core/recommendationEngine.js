@@ -2,7 +2,7 @@ import { calculateScopeScore } from "../battle/scoreEngine";
 import {
   calculateExpectedRemaining,
   calculateWorstCaseRemaining,
-} from "./entropyEngine";
+} from "../entropyEngine.js";
 
 // 全候補の中から最も良い一手を探す
 export function findBestGuess(candidates) {

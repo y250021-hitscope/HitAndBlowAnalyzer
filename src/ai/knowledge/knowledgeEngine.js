@@ -1,4 +1,4 @@
-import { championKnowledge } from "./championKnowledge";
+import { championKnowledge } from "./championKnowledge.js";
 
 export function evaluateChampionKnowledge(state) {
   const results = [];

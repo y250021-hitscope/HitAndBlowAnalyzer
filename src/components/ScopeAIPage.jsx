@@ -1,4 +1,4 @@
-import { chooseStrategy } from "../ai/battle/strategyEngine";
+import { chooseStrategy } from "../ai/battle/strategyEngine.js";
 import { useMemo, useState } from "react";
 import {
   filterCandidates,

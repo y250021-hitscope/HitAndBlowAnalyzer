@@ -1,4 +1,4 @@
-import { calculateHitBlow } from "../battleAI";
+import { calculateHitBlow } from "./battleAI";
 
 // 候補を、Hit/Blow結果ごとにグループ分けする
 export function groupCandidatesByResult(candidates, guess) {
